@@ -1,0 +1,3 @@
+LAQueryLogs
+| where TimeGenerated > ago(7d)
+| project AADEmail, QueryText
