@@ -1,0 +1,3 @@
+search "*USERNAME*"
+| where client_ip_s != "IPADR"
+| summarize count() by client_ip_s
