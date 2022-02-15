@@ -1,0 +1,9 @@
+Heartbeat
+| where TimeGenerated >= ago(7d)
+| project Computer, TimeGenerated
+| order by TimeGenerated desc
+| project n = TimeGenerated, nminus = prev(TimeGenerated), TimeGenerated, Computer
+| where isnotempty(nminus)
+// show time NOW vs time  n -1 row
+| extend second = datetime_diff('second',nminus, n)
+| where second >= 60
