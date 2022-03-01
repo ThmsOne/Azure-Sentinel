@@ -1,0 +1,9 @@
+let start_time=startofmonth(now());
+let end_time=endofmonth(now());
+Heartbeat
+| where TimeGenerated > start_time and TimeGenerated < end_time
+| summarize heartbeat_per_hour=count() by bin_at(TimeGenerated, 1h, start_time), Computer
+| extend available_per_hour=iff(heartbeat_per_hour>0, true, false)
+| summarize Available_Hours=countif(available_per_hour==true) by Computer
+| extend Total_Hours=round((end_time-start_time)/1h)
+| extend Availability=Available_Hours*100/Total_Hours

@@ -1,0 +1,3 @@
+AzureActivity
+| where OperationNameValue contains "MICROSOFT.SECURITYINSIGHTS/DATACONNECTORS/DELETE"
+| where CategoryValue == "Administrative"

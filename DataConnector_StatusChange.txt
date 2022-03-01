@@ -1,0 +1,4 @@
+AzureActivity
+| where Category contains "Administrative"
+| where ResourceProvider == "Microsoft.SecurityInsights"
+| where OperationName == "Update Data Connector"
